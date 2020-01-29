@@ -1,0 +1,35 @@
+.adminpanel {
+    padding: 10px;
+}
+.ekuboss {
+    border: 1px solid #cdcdcd;
+    padding: 8px 10px 4px;
+    
+    /* font-family: 'Raleway'; */
+    color: #333;
+    font-weight: 700;
+    overflow: hidden;
+}
+.ekuboss span {
+    float: left;
+    font-size: 16px;
+    padding-top: 3px;
+    font-weight: 700;
+}
+.clear {
+    clear: both;
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    margin-bottom: 8px;
+}
+.clear {
+    clear: both;
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}

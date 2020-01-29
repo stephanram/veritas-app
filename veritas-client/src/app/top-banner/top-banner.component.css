@@ -1,0 +1,21 @@
+.topbanner-toolbar {
+    background: #334b63;
+    color: #fff;
+}
+
+.welcome-text {
+    color: white;
+    font-size: 10px;
+}
+
+.welcome-text-user {
+    color: white;
+    font-size: 10px;
+}
+
+.vertical-separator {
+    border-right: 3px solid;
+    border-color: white;
+    height: 42px;
+    margin-right: 10px;
+}
