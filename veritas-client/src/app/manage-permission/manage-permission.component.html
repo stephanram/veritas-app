@@ -1,3 +1,51 @@
-<select >
-    <option *ngFor="let item of source" [value]="item">{{item}}</option>
-</select>
+<div class="row">
+    <span>Group Authorization Setting</span>
+</div>
+<div class="row">
+    <div class="col-md-1">
+        <span>Group Name*</span>
+    </div>
+    <div class="col-md-4">
+        <select [(ngModel)]="selectedRoleId">
+            <option *ngFor="let item of roleList" [value]="item.value">{{item.name}}</option>
+        </select>
+    </div>
+    <div class="col-md-1">
+        <span>Permission Name</span>
+    </div>
+    <div class="col-md-4">
+        <select multiple [(ngModel)]="selectedActions">
+            <option *ngFor="let item of actionList" [value]="item.value">{{item.name}}</option>
+        </select>
+    </div>
+    <div class="col-md-1">
+        <span>Enabled</span>
+    </div>
+    <div class="col-md-1">
+        <select>
+            <option value="0">Select</option>
+            <option value="1">Yes</option>
+            <option value="2">No</option>
+        </select>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Permission Name</th>
+            <th>Permission Description</th>
+            <th>Access Level</th>
+            <th>Mapped</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of roleActionMappingList">
+            <td scope="row">{{item.rolename}}</td>
+            <td>{{item.actionname}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

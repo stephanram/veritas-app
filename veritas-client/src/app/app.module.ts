@@ -5,7 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { TopBannerComponent } from './top-banner/top-banner.component';
+import { HttpClientModule } from '@angular/common/http';
 import { ManagePermissionComponent } from './manage-permission/manage-permission.component';
+import { RoleAuthorizationService } from './role-authorization.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,9 +19,11 @@ import { ManagePermissionComponent } from './manage-permission/manage-permission
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [RoleAuthorizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

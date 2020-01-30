@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RoleAuthorizationService } from '../role-authorization.service';
 
 @Component({
   selector: 'app-manage-permission',
@@ -6,14 +7,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-permission.component.css']
 })
 export class ManagePermissionComponent implements OnInit {
-  source: Array<string>;
-  constructor() { }
+  roleList: Array<string>;
+  actionList: Array<string>;
+  selectedRoleId: string;
+  selectedActions: Array<string>;
+  roleActionMappingList: Array<object>;
 
-  ngOnInit() {
-    this.source = ['Kavya1', 'Azar', 'Stanley'];
+  constructor(private roleService: RoleAuthorizationService) {
+    // Get Roles
+    roleService.getRoles().subscribe((data: Array<string>) => {
+      this.roleList = data;
+    });
+
+    // Get Actions
+    roleService.getActions().subscribe((data: Array<string>) => {
+      this.actionList = data;
+    });
+
+    roleService.getRoleActionMapping().subscribe((data: Array<object>) => {
+      this.roleActionMappingList = data;
+    });
+
   }
 
-  
+  ngOnInit() {
+
+  }
+
 
 
 }
