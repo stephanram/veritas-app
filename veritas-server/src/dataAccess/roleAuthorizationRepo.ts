@@ -1,3 +1,4 @@
+import { roleMap } from "../model/roleMap";
 const { Pool } = require('pg');
 const connectionString = require('./common/dbConfig');
 const pool = new Pool(connectionString);
@@ -44,11 +45,29 @@ class roleAuthorizationRepo {
         }
     }
 
-    public async getRoleActionMapping() {
+    public async getRoleActionMapping(roleMap: roleMap) {
         let client: any;
         try {
             client = await pool.connect();
-            const query = 'select r.roleid, r.rolename, a.actionid, a.actionname, a.isdatalevel from roleactionmapping ra (nolock), roles r,actions a  where ra.roleid = r.roleid and ra.actionid = a.actionid and r.isactive = B\'1\'';
+            const query = {
+                text: `select
+                                a.actionid,
+                                a.actionname,
+                                a.description,
+                                a.isdatalevel,
+                                ra.roleactionmappingid 
+                            from
+                                actions a 
+                                left join
+                                roleactionmapping ra 
+                                on ra.actionid = a.actionid
+                            where
+                                a.status = B'1' 
+                                and ra.roleid = $1
+                                and a.actionid = ANY ($2)
+                            order by
+                                a.actionname`, values: [roleMap.roleId, roleMap.actionList]
+            }
             const result = await client.query(query);
             return result;
         }

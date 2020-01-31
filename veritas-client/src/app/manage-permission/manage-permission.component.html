@@ -1,5 +1,10 @@
 <div class="row">
-    <span>Group Authorization Setting</span>
+    <div class="col-md-4">
+        <span>Group Authorization Setting</span>
+    </div>
+    <div class="col-md-8">
+        <input class="btn btn-primary" type="button" (click) = "getRoleActionMapping()" value="Search">
+    </div>
 </div>
 <div class="row">
     <div class="col-md-1">
@@ -41,11 +46,11 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of roleActionMappingList">
-            <td scope="row">{{item.rolename}}</td>
-            <td>{{item.actionname}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td scope="row">{{item.actionname}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.isdatalevel}}</td>
+            <td>{{item.roleactionmappingid}}</td>
+            <td>Edit</td>
         </tr>
     </tbody>
 </table>

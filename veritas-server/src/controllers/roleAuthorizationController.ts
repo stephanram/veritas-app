@@ -1,11 +1,13 @@
-import { Controller, Get, Service } from "@tsed/common";
+import { Controller, Get, Service, Post, BodyParams } from "@tsed/common";
+import { roleMap } from "../model/roleMap";
 const roleAuthService = require('../services/roleAuthorizationService');
 const service = new roleAuthService();
+
 
 @Controller("/roleAuthorization")
 export class roleAuthorizationController {
   @Get("/getRoles")
-  async getRoles(): Promise<any> {
+  async getRoles() {
     try {
       var result = await service.getRoles();
       return result;
@@ -16,7 +18,7 @@ export class roleAuthorizationController {
   }
 
   @Get("/getActions")
-  async getActions(): Promise<any> {
+  async getActions() {
     try {
       var result = await service.getActions();
       return result;
@@ -26,10 +28,10 @@ export class roleAuthorizationController {
     }
   }
 
-  @Get("/getRoleActionMapping")
-  async getRoleActionMapping(): Promise<any> {
+  @Post("/getRoleActionMapping")
+  async getRoleActionMapping(@BodyParams() roleMapModel: roleMap) {
     try {
-      var result = await service.getRoleActionMapping();
+      let result = await service.getRoleActionMapping(roleMapModel);
       return result;
     }
     catch (err) {

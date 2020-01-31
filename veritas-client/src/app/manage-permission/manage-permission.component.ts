@@ -12,21 +12,22 @@ export class ManagePermissionComponent implements OnInit {
   selectedRoleId: string;
   selectedActions: Array<string>;
   roleActionMappingList: Array<object>;
+  roleService: RoleAuthorizationService;
 
-  constructor(private roleService: RoleAuthorizationService) {
+  constructor(roleService: RoleAuthorizationService) {
     // Get Roles
-    roleService.getRoles().subscribe((data: Array<string>) => {
+    this.roleService = roleService;
+
+    this.roleService.getRoles().subscribe((data: Array<string>) => {
       this.roleList = data;
     });
 
     // Get Actions
-    roleService.getActions().subscribe((data: Array<string>) => {
+    this.roleService.getActions().subscribe((data: Array<string>) => {
       this.actionList = data;
     });
 
-    roleService.getRoleActionMapping().subscribe((data: Array<object>) => {
-      this.roleActionMappingList = data;
-    });
+
 
   }
 
@@ -34,6 +35,11 @@ export class ManagePermissionComponent implements OnInit {
 
   }
 
+  public getRoleActionMapping(){
+    this.roleService.getRoleActionMapping(this.selectedActions, this.selectedRoleId).subscribe((data: Array<object>) => {
+      this.roleActionMappingList = data;
+    });
+  }
 
 
 }

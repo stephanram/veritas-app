@@ -1,3 +1,4 @@
+import { roleMap } from "../model/roleMap";
 const roleAuthRepo = require('../dataAccess/roleAuthorizationRepo');
 const dataAccess = new roleAuthRepo();
 
@@ -36,9 +37,9 @@ class roleAuthorizationService {
         }
     }
 
-    public async getRoleActionMapping() {
+    public async getRoleActionMapping(roleMap: roleMap) {
         try {
-            var result =  await dataAccess.getRoleActionMapping();
+            var result =  await dataAccess.getRoleActionMapping(roleMap);
             var records = result.rows.reduce((list, item)=>{
                 list.push(item);
                 return list;
