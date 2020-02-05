@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ManagePermissionComponent } from './manage-permission/manage-permission.component';
 import { RoleAuthorizationService } from './role-authorization.service';
 import { FormsModule } from '@angular/forms';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule
   ],
   providers: [RoleAuthorizationService],
   bootstrap: [AppComponent]

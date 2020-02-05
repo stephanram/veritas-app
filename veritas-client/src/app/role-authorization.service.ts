@@ -35,11 +35,12 @@ export class RoleAuthorizationService {
   /**
    * getRoleActionMapping
    */
-  public getRoleActionMapping(actionListModel: Array<string>, selectedRoleId: string) {
+  public getRoleActionMapping(actionListModel: Array<string>, selectedRoleId: string, roleActionCheck: string) {
     const signature = '/roleAuthorization/getRoleActionMapping';
     const roleMap = {
       actionList: actionListModel,
-      roleId: selectedRoleId
+      roleId: selectedRoleId,
+      roleActionMapCheck: roleActionCheck,
     };
     try {
       return this.http.post(this.baseUrl + signature, roleMap);

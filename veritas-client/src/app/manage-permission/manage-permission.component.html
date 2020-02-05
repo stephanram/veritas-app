@@ -12,7 +12,7 @@
     </div>
     <div class="col-md-4">
         <select [(ngModel)]="selectedRoleId">
-            <option *ngFor="let item of roleList" [value]="item.value">{{item.name}}</option>
+            <option *ngFor="let role of roleList" [value]="role.value">{{role.name}}</option>
         </select>
     </div>
     <div class="col-md-1">
@@ -20,21 +20,21 @@
     </div>
     <div class="col-md-4">
         <select multiple [(ngModel)]="selectedActions">
-            <option *ngFor="let item of actionList" [value]="item.value">{{item.name}}</option>
+            <option *ngFor="let action of actionList" [value]="action.value">{{action.name}}</option>
         </select>
     </div>
     <div class="col-md-1">
         <span>Enabled</span>
     </div>
     <div class="col-md-1">
-        <select>
+        <select [(ngModel)]="roleActionMapCheck">
             <option value="0">Select</option>
             <option value="1">Yes</option>
             <option value="2">No</option>
         </select>
     </div>
 </div>
-<table class="table">
+<table datatable [dtOptions] = "dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
     <thead>
         <tr>
             <th>Permission Name</th>
@@ -49,7 +49,10 @@
             <td scope="row">{{item.actionname}}</td>
             <td>{{item.description}}</td>
             <td>{{item.isdatalevel}}</td>
-            <td>{{item.roleactionmappingid}}</td>
+            <td>
+                <!--<span>{{item.roleactionmappingid}}</span>-->
+                <input type="checkbox" [checked]="item.isRoleMapped" disabled/> 
+            </td>
             <td>Edit</td>
         </tr>
     </tbody>
