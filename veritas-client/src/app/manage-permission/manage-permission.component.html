@@ -1,59 +1,72 @@
+<br>
 <div class="row">
     <div class="col-md-4">
         <span>Group Authorization Setting</span>
     </div>
     <div class="col-md-8">
-        <input class="btn btn-primary" type="button" (click) = "getRoleActionMapping()" value="Search">
+        <button mat-stroked-button color="primary" (click)="getRoleActionMapping()">Search</button>
     </div>
 </div>
+<br>
 <div class="row">
-    <div class="col-md-1">
-        <span>Group Name*</span>
+    <div class="col-md-2">
+        <mat-label>Group Name*</mat-label>
     </div>
-    <div class="col-md-4">
-        <select [(ngModel)]="selectedRoleId">
-            <option *ngFor="let role of roleList" [value]="role.value">{{role.name}}</option>
-        </select>
+    <div class="col-md-2">
+        <mat-select [(ngModel)]="selectedRoleId">
+            <mat-option *ngFor="let role of roleList" [value]="role.value">{{role.name}}</mat-option>
+        </mat-select>
     </div>
-    <div class="col-md-1">
-        <span>Permission Name</span>
+    <div class="col-md-2">
+        <mat-label>Permission Name</mat-label>
     </div>
-    <div class="col-md-4">
-        <select multiple [(ngModel)]="selectedActions">
-            <option *ngFor="let action of actionList" [value]="action.value">{{action.name}}</option>
-        </select>
+    <div class="col-md-3">
+        <mat-select [(ngModel)]="selectedActions" multiple>
+            <mat-option *ngFor="let action of actionList" [value]="action.value">{{action.name}}</mat-option>
+        </mat-select>
     </div>
     <div class="col-md-1">
         <span>Enabled</span>
     </div>
     <div class="col-md-1">
-        <select [(ngModel)]="roleActionMapCheck">
-            <option value="0">Select</option>
-            <option value="1">Yes</option>
-            <option value="2">No</option>
-        </select>
+        <mat-select [(ngModel)]="roleActionMapCheck">
+            <mat-option value="0">Select</mat-option>
+            <mat-option value="1">Yes</mat-option>
+            <mat-option value="2">Yes</mat-option>
+        </mat-select>
     </div>
 </div>
-<table datatable [dtOptions] = "dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
-    <thead>
-        <tr>
-            <th>Permission Name</th>
-            <th>Permission Description</th>
-            <th>Access Level</th>
-            <th>Mapped</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of roleActionMappingList">
-            <td scope="row">{{item.actionname}}</td>
-            <td>{{item.description}}</td>
-            <td>{{item.isdatalevel}}</td>
-            <td>
-                <!--<span>{{item.roleactionmappingid}}</span>-->
-                <input type="checkbox" [checked]="item.isRoleMapped" disabled/> 
+<br>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+        <!-- Permission Name Column -->
+        <ng-container matColumnDef="actionname">
+            <th mat-header-cell *matHeaderCellDef> Permission Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.actionname}} </td>
+        </ng-container>
+
+        <!-- Permission Description Column -->
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Permission Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <!-- Access Level Column -->
+        <ng-container matColumnDef="isdatalevel">
+            <th mat-header-cell *matHeaderCellDef> Access Level </th>
+            <td mat-cell *matCellDef="let element"> {{element.isdatalevel}} </td>
+        </ng-container>
+
+        <!-- Mapped Column -->
+        <ng-container matColumnDef="isRoleMapped">
+            <th mat-header-cell *matHeaderCellDef> Mapped </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-checkbox [checked]="element.isRoleMapped" disabled></mat-checkbox>
             </td>
-            <td>Edit</td>
-        </tr>
-    </tbody>
-</table>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

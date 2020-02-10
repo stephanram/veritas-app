@@ -10,6 +10,12 @@ import { ManagePermissionComponent } from './manage-permission/manage-permission
 import { RoleAuthorizationService } from './role-authorization.service';
 import { FormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,13 @@ import { DataTablesModule } from 'angular-datatables';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    DataTablesModule
+    DataTablesModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatPaginatorModule
   ],
   providers: [RoleAuthorizationService],
   bootstrap: [AppComponent]

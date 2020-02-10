@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RoleAuthorizationService } from '../role-authorization.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-manage-permission',
@@ -14,9 +16,12 @@ export class ManagePermissionComponent implements OnInit {
   roleActionMappingList: Array<object>;
   roleService: RoleAuthorizationService;
   roleActionMapCheck: string;
+  dataSource: any;
 
-  dtOptions: DataTables.Settings = {};
- 
+  // table configuration
+  displayedColumns: string[] = ['actionname', 'description', 'isdatalevel', 'isRoleMapped'];
+  @ViewChild(MatPaginatorModule, {static: true}) paginator: MatPaginatorModule;
+
   constructor(roleService: RoleAuthorizationService) {
     // Get Roles
     this.roleService = roleService;
@@ -30,14 +35,11 @@ export class ManagePermissionComponent implements OnInit {
       this.actionList = data;
     });
 
-    // datatable settings
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-    };
   }
 
   ngOnInit() {
-
+    // Initializing paginator
+    this.dataSource.paginator = this.paginator;
   }
 
   public getRoleActionMapping() {
@@ -56,8 +58,7 @@ export class ManagePermissionComponent implements OnInit {
             isRoleMapped: Number.isInteger(item.roleactionmappingid) ? true : false
           };
         });
+        this.dataSource = new MatTableDataSource(this.roleActionMappingList);
       });
   }
-
-
 }
