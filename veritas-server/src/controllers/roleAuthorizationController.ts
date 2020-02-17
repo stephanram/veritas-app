@@ -1,40 +1,51 @@
 import { Controller, Get, Service, Post, BodyParams } from "@tsed/common";
-import { roleMap } from "../model/roleMap";
-const roleAuthService = require('../services/roleAuthorizationService');
-const service = new roleAuthService();
+import { RoleMap } from "../model/roleMap";
+const roleAuthService: any = require("../services/roleAuthorizationService");
+const service: any = new roleAuthService();
 
 
 @Controller("/roleAuthorization")
-export class roleAuthorizationController {
+export class RoleAuthorizationController {
   @Get("/getRoles")
-  async getRoles() {
+  async getRoles(): Promise<any> {
     try {
-      var result = await service.getRoles();
+      // tslint:disable-next-line: typedef
+      const result = await service.getRoles();
       return result;
-    }
-    catch (err) {
+    } catch (err) {
       return err.message;
     }
   }
 
   @Get("/getActions")
-  async getActions() {
+  async getActions(): Promise<any> {
     try {
-      var result = await service.getActions();
+      // tslint:disable-next-line: typedef
+      const result = await service.getActions();
       return result;
-    }
-    catch (err) {
+    } catch (err) {
       return err.message;
     }
   }
 
   @Post("/getRoleActionMapping")
-  async getRoleActionMapping(@BodyParams() roleMapModel: roleMap) {
+  async getRoleActionMapping(@BodyParams() roleMapModel: RoleMap): Promise<any> {
     try {
-      let result = await service.getRoleActionMapping(roleMapModel);
+      // tslint:disable-next-line: typedef
+      const result = await service.getRoleActionMapping(roleMapModel);
       return result;
+    } catch (err) {
+      return err.message;
     }
-    catch (err) {
+  }
+
+  @Get("/getAccessLevels")
+  async getAccessLevels(): Promise<any> {
+    try {
+      // tslint:disable-next-line: typedef
+      const result = await service.getAccessLevels();
+      return result;
+    } catch (err) {
       return err.message;
     }
   }

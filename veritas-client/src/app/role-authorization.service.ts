@@ -33,6 +33,17 @@ export class RoleAuthorizationService {
   }
 
   /**
+   * getActions
+   */
+  public getAccessLevels() {
+    const signature = '/roleAuthorization/getAccessLevels';
+    try {
+      return this.http.get(this.baseUrl + signature);
+    } catch (error) {
+    }
+  }
+
+  /**
    * getRoleActionMapping
    */
   public getRoleActionMapping(actionListModel: Array<string>, selectedRoleId: string, roleActionCheck: string) {

@@ -5,6 +5,7 @@ import * as cookieParser from "cookie-parser";
 import * as methodOverride from "method-override";
 import * as cors from "cors";
 
+// tslint:disable-next-line: typedef
 const rootDir = __dirname;
 
 @ServerSettings({
@@ -12,7 +13,6 @@ const rootDir = __dirname;
   acceptMimes: ["application/json"],
   httpPort: 8080,
   httpsPort: 5000,
-  
 })
 export class Server extends ServerLoader {
   /**
